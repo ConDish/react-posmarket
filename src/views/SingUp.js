@@ -1,4 +1,25 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-// Views
+
+
+
+class SingUp extends Component {
+
+  static navigationOptions = {
+    title: 'Bienvenido',
+    headerLeft: null
+  }
+
+
+
+  render() {
+    return (
+      <View>
+        <Text>Hola</Text>
+      </View>
+    )
+  }
+}
+
+export default SingUp;

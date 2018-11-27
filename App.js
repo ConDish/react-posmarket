@@ -1,27 +1,54 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import { createAppContainer, createStackNavigator, createDrawerNavigator, createSwitchNavigator } from 'react-navigation';
+import { Root } from 'native-base';
+import Expo from "expo";
 
 // Views
+import HomeView from './src/views/Home';
 import LoginView from './src/views/Login';
 import SingUpView from './src/views/SingUp';
-import HomeView from './src/views/Home';
+import AuthLoadingView from './src/views/AuthLoading';
 
-// Menu 
-const Menu = createStackNavigator(
+
+const AppDrawer = createDrawerNavigator(
   {
-    Home : HomeView,
-    Login : LoginView,
-    SingUp : SingUpView,
+    Home: HomeView,
+
   },
   {
-    initialRouteName : 'Home',
-    navigationOptions : {
-      headerStyle : {
-        backgroundColor: "#0288d1"
-      },
-      headerTintColor : '#fff',
-    }
+    initialRouteName: 'Home',
+  }
+);
+
+const AppNavigator = createStackNavigator(
+
+  {
+    Login: LoginView,
+    SingUp: SingUpView,
+  }
+
+);
+
+const Menu = createSwitchNavigator(
+  {
+    AuthLoading : AuthLoadingView,
+    App : AppDrawer,
+    Auth : AppNavigator,
+
+  },
+  {
+    initialRouteName: 'AuthLoading',
   }
 )
 
-export default() => <Root> <Menu/> </Root>
+
+
+const AppContainer = createAppContainer(Menu);
+
+
+export default () =>
+  <Root>
+    <AppContainer />
+  </Root>
+

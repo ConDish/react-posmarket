@@ -1,22 +1,26 @@
-import React, { Component } from 'react'
-import { StyleSheet } from 'react-native'
-import { Container, Toast, Button, Text, Card, Form, Input, Item } from 'native-base'
-import Expo from "expo"
+import React, { Component } from 'react';
+import { StyleSheet } from 'react-native';
+import { Container, Toast, Button, Text, Card, Form, Input, Item } from 'native-base';
+import * as Expo from 'expo';
 
 
 class Home extends Component {
 
     static navigationOptions = {
-        title : 'Home',
+        title: 'Home',
     }
 
-    constructor(props){
-        super();
+
+    constructor(props) {
+        super(props);
+
 
         this.state = {
-            loading : true,
+            loading: true
         }
+
     }
+
 
 
     async componentWillMount() {
@@ -29,25 +33,31 @@ class Home extends Component {
         this.setState({ loading: false });
     }
 
-    render(){
 
-        if (message) {
-            Toast.show({ text: message, type: 'danger', duration: 4000 });
-        }
+
+
+    render() {
+
+
 
 
         if (this.state.loading) {
             return <Expo.AppLoading />;
         }
 
-        return(
+
+        return (
             <Container>
-                <Text>Welcome!</Text>
+
+               <Text>Hola</Text>
+
             </Container>
-        )
+        );
     }
 
-
 }
+
+
+
 
 export default Home;
