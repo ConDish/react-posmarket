@@ -3,12 +3,14 @@ import { StyleSheet, View } from 'react-native';
 import { createAppContainer, createStackNavigator, createDrawerNavigator, createSwitchNavigator } from 'react-navigation';
 import { Root } from 'native-base';
 import Expo from "expo";
-
 // Views
 import HomeView from './src/views/Home';
 import LoginView from './src/views/Login';
 import SingUpView from './src/views/SingUp';
 import AuthLoadingView from './src/views/AuthLoading';
+
+
+
 
 
 const AppDrawer = createDrawerNavigator(

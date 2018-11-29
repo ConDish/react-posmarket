@@ -4,6 +4,8 @@ import { Container, Toast, Button, Text, Card, Form, Input, Item } from 'native-
 import * as Expo from 'expo';
 
 
+
+
 class Home extends Component {
 
     static navigationOptions = {
@@ -23,6 +25,7 @@ class Home extends Component {
 
 
 
+
     async componentWillMount() {
         await Expo.Font.loadAsync({
             Roboto: require("native-base/Fonts/Roboto.ttf"),
@@ -31,6 +34,7 @@ class Home extends Component {
         });
 
         this.setState({ loading: false });
+        loadReCaptcha('6LdmtX0UAAAAAA9JUvA_XBK_61yy5ZMibyFRTEjF');
     }
 
 
