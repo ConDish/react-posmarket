@@ -2,17 +2,19 @@ import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
 import { Container, Toast, Button, Text, Card, Form, Input, Item } from 'native-base';
 import * as Expo from 'expo';
-import { FontAwesome } from '@expo/vector-icons';
-import User from '../components/Users';
 
 
-class Home extends Component {
 
+
+class Products extends Component {
 
     static navigationOptions = {
-        title: 'Home',
-
-
+        title: 'Products',
+        headerRight: (
+            <Button transparent onPress={() => navigation.push('SignUp')} >
+                <Text>Hola</Text>
+            </Button>
+        )
     }
 
 
@@ -47,6 +49,8 @@ class Home extends Component {
     render() {
 
 
+
+
         if (this.state.loading) {
             return <Expo.AppLoading />;
         }
@@ -54,18 +58,16 @@ class Home extends Component {
 
         return (
             <Container>
-                <User props={this.props} title="Home" />
 
-               <Text>Hola desde home</Text>
+                <Text>Hola</Text>
 
             </Container>
         );
     }
-    
 
 }
 
 
 
 
-export default Home;
+export default Products;

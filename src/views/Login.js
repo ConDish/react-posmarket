@@ -10,11 +10,11 @@
 #                                                         #
 ###########################################################
 */
-
+'use stric'
 import React, { Component } from 'react';
-import { StyleSheet, View, WebView } from 'react-native';
-import { Container, Form, Item, Label, Input, Button, Text, Footer, FooterTab, Card, CardItem, Body } from 'native-base';
-
+import { StyleSheet, View, WebView, AsyncStorage } from 'react-native';
+import { Container, Form, Item, Label, Input, Button, Text, Footer, FooterTab, Card, CardItem, Body, Toast } from 'native-base';
+import  md5  from 'md5';
 
 
 
@@ -26,7 +26,6 @@ class Login extends Component {
 
     static navigationOptions = {
         title: 'Welcome',
-        headerLeft: null,
         headerStyle: {
             backgroundColor: "#900C3F"
         },
@@ -37,7 +36,7 @@ class Login extends Component {
       super(props)
     
       this.state = {
-         username : '',
+         email : '',
          password : '',
          loading: true,
       }
@@ -62,15 +61,35 @@ class Login extends Component {
 
     }
 
+    async onLogin() {
 
-    // Verificar captcha
-    verifyCallback = (recaptchaToken) =>{
-        console.log(recaptchaToken, " my recaptcha token");
+        let formData = new FormData();
+        
+        const url = 'https://samioff15.000webhostapp.com/datos.php?op=2';
+
+        formData.append("email", this.state.email );
+        formData.append("password", md5(this.state.password));
+
+        let response = await fetch(url, {
+            method: 'POST',
+            body: formData
+        }).then((response) => response.json());
+
+
+        if(response.login == "succes"){
+            
+           Toast.show({
+               text: `Welcome ${response.dato.nombre}`,
+               type: 'success',
+               duration: 4000
+           });
+
+           await AsyncStorage.setItem('userToken', response.dato.nombre);
+
+           this.props.navigation.navigate('App');
+        }
+
     }
-
-    exppiredCallback = (data) => {
-        console.log(data);
-    };
 
 
 
@@ -90,12 +109,12 @@ class Login extends Component {
                     <Body>
                         <Form>
                             <Item stackedLabel>
-                                <Label style={{ color: '#900C3F'}}>Username</Label>
-                                <Input onChangeText={(username) => this.setState({username})}/>
+                                <Label style={{ color: '#900C3F'}}>Email</Label>
+                                <Input onChangeText={(email) => this.setState({email})}/>
                             </Item>
                             <Item stackedLabel style={{ marginTop : 50}}>
                                 <Label style={{ color: '#900C3F'}}>Password</Label>
-                                <Input onChangeText={(password) => this.setState({password})}/>
+                                 <Input secureTextEntry={true} onChangeText={(password) => this.setState({password})}/>
                             </Item>
                         </Form>
                     </Body>
@@ -112,7 +131,9 @@ class Login extends Component {
                         </View>
                     <CardItem>
                         <Body>
-                            <Button style={{ backgroundColor: '#900C3F', width: '100%', marginTop : 20 }} block>
+                            <Button style={{ backgroundColor: '#900C3F', width: '100%', marginTop : 20 }} block
+                                onPress = {() => this.onLogin()}
+                            >
                                 <Text>Login</Text>
                             </Button>
                         </Body>

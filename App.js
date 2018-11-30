@@ -1,13 +1,48 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, FlatList, DrawerItems, SafeAreaView, ScrollView, AsyncStorage } from 'react-native';
 import { createAppContainer, createStackNavigator, createDrawerNavigator, createSwitchNavigator } from 'react-navigation';
-import { Root } from 'native-base';
+import { Root, Container, Header, Content, ListItem, Text, Icon, View, Button } from 'native-base';
 import Expo from "expo";
+import { FontAwesome } from '@expo/vector-icons';
+
 // Views
 import HomeView from './src/views/Home';
+import ProductsView from './src/views/Products';
 import LoginView from './src/views/Login';
 import SingUpView from './src/views/SingUp';
 import AuthLoadingView from './src/views/AuthLoading';
+
+var user = '';
+
+
+const getUser = async () => {
+  user = await AsyncStorage.getItem('userToken');
+
+}
+
+
+
+const CustomDrawerContentComponent = (props) => {
+
+  getUser();
+
+
+
+  return (
+    <Container>
+      <Header style={{ backgroundColor: '#900C3F', height: 100 }}>
+
+        <View style={{ flexDirection: 'row', flex: 1, alignItems: 'center' }}>
+          <Icon name="person" style={{ color: 'white', }} />
+          <Text style={{ color: 'white', fontSize: 22, fontStyle: 'italic', marginLeft: 10 }} >Hello {user}</Text>
+        </View>
+
+      </Header>
+
+
+    </Container>
+  );
+}
 
 
 
@@ -16,10 +51,13 @@ import AuthLoadingView from './src/views/AuthLoading';
 const AppDrawer = createDrawerNavigator(
   {
     Home: HomeView,
-
+    Products: ProductsView
+    
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'Home', 
+    contentComponent: CustomDrawerContentComponent,
+
   }
 );
 
