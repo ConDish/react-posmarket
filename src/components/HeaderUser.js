@@ -3,8 +3,7 @@ import { Header, View, Text } from 'native-base';
 import { FontAwesome } from '@expo/vector-icons';
 import { AsyncStorage } from 'react-native';
 
-
-class User extends Component {
+class HeaderUser extends Component {
 
     constructor(props) {
         super(props);
@@ -23,7 +22,7 @@ class User extends Component {
 
     render() {
         return (
-            <Header style={{ backgroundColor: '#900C3F', justifyContent: 'space-between', alignItems: 'flex-end', height: 80, paddingBottom: 10, marginBottom: 8 }}>
+            <Header style={{ backgroundColor: this.props.style, justifyContent: 'space-between', alignItems: 'flex-end', height: 80, paddingBottom: 10, marginBottom: 8 }}>
                 <View style={{ flexDirection: 'row' }}>
                     <FontAwesome name="bars" style={{ color: 'white', fontSize: 30 }} onPress={() => this.openDrawer()} />
                     <Text style={{ color: 'white', fontSize: 24, fontWeight: 'bold', marginLeft: 10, }}>{this.props.title}</Text>
@@ -41,4 +40,5 @@ class User extends Component {
 
 
 
-export default User;
+
+export default HeaderUser;

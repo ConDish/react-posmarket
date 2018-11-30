@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, FlatList, DrawerItems, SafeAreaView, ScrollView, AsyncStorage } from 'react-native';
 import { createAppContainer, createStackNavigator, createDrawerNavigator, createSwitchNavigator } from 'react-navigation';
-import { Root, Container, Header, Content, ListItem, Text, Icon, View, Button } from 'native-base';
+import { Root, Container, Header, Content, ListItem, Text, Icon, View, Button, Thumbnail } from 'native-base';
 import Expo from "expo";
 import { FontAwesome } from '@expo/vector-icons';
 
@@ -30,12 +30,14 @@ const CustomDrawerContentComponent = (props) => {
 
   return (
     <Container>
-      <Header style={{ backgroundColor: '#900C3F', height: 100 }}>
+      <Header style={{ backgroundColor: '#900C3F', height: 140 }}>
 
-        <View style={{ flexDirection: 'row', flex: 1, alignItems: 'center' }}>
-          <Icon name="person" style={{ color: 'white', }} />
+        <View style={{ flexDirection: 'column', flex: 1, alignItems: 'center'}}>
+          <Thumbnail large source={{uri: 'https://picsum.photos/640/363'}} />
           <Text style={{ color: 'white', fontSize: 22, fontStyle: 'italic', marginLeft: 10 }} >Hello {user}</Text>
+          
         </View>
+        
 
       </Header>
 
@@ -78,7 +80,7 @@ const Menu = createSwitchNavigator(
 
   },
   {
-    initialRouteName: 'AuthLoading',
+    initialRouteName: 'App',
   }
 )
 

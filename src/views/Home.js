@@ -1,16 +1,41 @@
 import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
-import { Container, Toast, Button, Text, Card, Form, Input, Item } from 'native-base';
+import { StyleSheet, Image } from 'react-native';
+import { Container, Toast, Button, Text, Card, Form, Input, Item, Icon } from 'native-base';
 import * as Expo from 'expo';
+import { createMaterialTopTabNavigator, createAppContainer} from 'react-navigation';
 import { FontAwesome } from '@expo/vector-icons';
-import User from '../components/Users';
+import HeaderUser from '../components/HeaderUser';
 
+// Views
+
+import ProductsView from './Products';
 
 class Home extends Component {
 
 
     static navigationOptions = {
-        title: 'Home',
+        title : '',
+        tabBarIcon: ({ tintColor }) => (
+            <FontAwesome name="home" style={{ color: 'white', fontSize: 30 }} />
+            
+          ),
+        tabBarOptions: {
+            showIcon: true,
+            activeTintColor: '#000',
+            labelStyle: {
+                fontSize: 10,
+
+            },
+            style: {
+                backgroundColor: '#3897BB',
+                height: 50
+            },
+            indicatorStyle: {
+                borderBottomColor: '#3897BB',
+                borderBottomWidth: 2,
+            },
+
+        }
 
 
     }
@@ -54,10 +79,11 @@ class Home extends Component {
 
         return (
             <Container>
-                <User props={this.props} title="Home" />
+                <HeaderUser props={this.props} title="Home" style="#3897BB" />
 
                <Text>Hola desde home</Text>
 
+               
             </Container>
         );
     }
@@ -65,7 +91,25 @@ class Home extends Component {
 
 }
 
+const Tabs = createMaterialTopTabNavigator(
+    {
+        Home : Home,
+        Products : ProductsView
+    },
+    {
+          // Agregar estilos o iconos a mi tabnavigator
+        animationEnabled: true,
+        swipeEnabled: true,
+        tabBarPosition: 'bottom',
+
+
+    }
+)
+
+const AppContainer = createAppContainer(Tabs);
 
 
 
-export default Home;
+
+
+export default AppContainer;

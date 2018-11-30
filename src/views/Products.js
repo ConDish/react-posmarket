@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
 import { Container, Toast, Button, Text, Card, Form, Input, Item } from 'native-base';
 import * as Expo from 'expo';
+import { FontAwesome } from '@expo/vector-icons';
+import HeaderUser from '../components/HeaderUser';
 
 
 
@@ -9,12 +11,28 @@ import * as Expo from 'expo';
 class Products extends Component {
 
     static navigationOptions = {
-        title: 'Products',
-        headerRight: (
-            <Button transparent onPress={() => navigation.push('SignUp')} >
-                <Text>Hola</Text>
-            </Button>
-        )
+        title: '',
+        tabBarIcon: ({ tintColor }) => (
+            <FontAwesome name="shopping-cart" style={{ color: 'white', fontSize: 30 }} />
+            
+          ),
+        tabBarOptions: {
+            showIcon: true,
+            activeTintColor: '#000',
+            labelStyle: {
+                fontSize: 10,
+
+            },
+            style: {
+                backgroundColor: '#AA27E8',
+                height: 50
+            },
+            indicatorStyle: {
+                borderBottomColor: '#AA27E8',
+                borderBottomWidth: 2,
+            },
+
+        }
     }
 
 
@@ -58,7 +76,7 @@ class Products extends Component {
 
         return (
             <Container>
-
+                <HeaderUser props={this.props} title="Products" style="#AA27E8" />
                 <Text>Hola</Text>
 
             </Container>
